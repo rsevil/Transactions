@@ -1,0 +1,7 @@
+D:\WorkGit\rsevil-origin\TxFileManager\ChinhDo.Transactions.FileManager\bin\Debug\ChinhDo.Transactions.XML
+D:\WorkGit\rsevil-origin\TxFileManager\ChinhDo.Transactions.FileManager\bin\Debug\ChinhDo.Transactions.dll
+D:\WorkGit\rsevil-origin\TxFileManager\ChinhDo.Transactions.FileManager\bin\Debug\ChinhDo.Transactions.pdb
+D:\WorkGit\rsevil-origin\TxFileManager\ChinhDo.Transactions.FileManager\bin\Debug\xunit.dll
+D:\WorkGit\rsevil-origin\TxFileManager\ChinhDo.Transactions.FileManager\bin\Debug\xunit.xml
+D:\WorkGit\rsevil-origin\TxFileManager\ChinhDo.Transactions.FileManager\obj\Debug\ChinhDo.Transactions.dll
+D:\WorkGit\rsevil-origin\TxFileManager\ChinhDo.Transactions.FileManager\obj\Debug\ChinhDo.Transactions.pdb

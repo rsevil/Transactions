@@ -1,4 +1,4 @@
-This solution contains the Transactional File Manager. Transactional File Manager  
+This solution contains the Transactional File Manager. Transactional File Manager   
 allows the inclusion of filesystem operations in a System.Transactions transaction.
 
 This is an open source project. The project web site is at https://transactionalfilemgr.codeplex.com/.

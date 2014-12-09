@@ -8,8 +8,8 @@
     <ProjectGuid>{2C3F1182-D243-448C-84B0-2F869A96A871}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ChinhDo.Transactions.FileManagerTest</RootNamespace>
-    <AssemblyName>ChinhDo.Transactions.FileManagerTest</AssemblyName>
+    <RootNamespace>ChinhDo.Transactions.FileManager.Tests</RootNamespace>
+    <AssemblyName>ChinhDo.Transactions.FileManager.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
@@ -72,7 +72,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ChinhDo.Transactions.FileManager\ChinhDo.Transactions.FileManager.csproj">
+    <ProjectReference Include="..\..\ChinhDo.Transactions.FileManager\ChinhDo.Transactions.FileManager.csproj">
       <Project>{E824ACBB-90C8-4C60-9D52-9C8020E98E3E}</Project>
       <Name>ChinhDo.Transactions.FileManager</Name>
     </ProjectReference>

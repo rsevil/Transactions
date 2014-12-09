@@ -7,7 +7,7 @@ using System.Transactions;
 using System.Xml;
 using Xunit;
 
-namespace ChinhDo.Transactions.FileManagerTest
+namespace ChinhDo.Transactions.FileManager.Tests
 {
     public class FileManagerTest : IDisposable
     {

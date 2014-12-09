@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ChinhDo.Transactions.TxFileManager")]
-[assembly: AssemblyDescription("Chinh Do's Transactional File Manager for .NET")]
+[assembly: AssemblyTitle("ChinhDo.Transactions.FileManager")]
+[assembly: AssemblyDescription("A transactional file manager for .NET")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Chinh Do")]
-[assembly: AssemblyProduct("ChinhDo.Transactions.TxFileManager")]
+[assembly: AssemblyCompany("ChinhDo")]
+[assembly: AssemblyProduct("ChinhDo.Transactions.FileManager")]
 [assembly: AssemblyCopyright("Copyright ©  2008 Chinh Do http://www.chinhdo.com")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Transactions;
 using System.Xml;
@@ -7,24 +9,41 @@ using Xunit;
 
 namespace ChinhDo.Transactions.FileManagerTest
 {
-    public class FileManagerTest
+    public class FileManagerTest : IDisposable
     {
         private int _numTempFiles;
         private IFileManager _target;
 
-        //[SetUp]
         public FileManagerTest()
         {
             _target = new TxFileManager();
             _numTempFiles = Directory.GetFiles(Path.Combine(Path.GetTempPath(), "CdFileMgr")).Length;
         }
 
-        //[TearDown]
-        //public void TestCleanup()
-        //{
-        //    int numTempFiles = Directory.GetFiles(Path.Combine(Path.GetTempPath(), "CdFileMgr")).Length;
-        //    Assert.Equal(_numTempFiles, numTempFiles, "Unexpected value for numTempFiles.");
-        //}
+        private byte[] StringToByteArray(string hex)
+        {
+            hex = hex.Replace("-", "").Replace(" ", "");
+            return Enumerable.Range(0, hex.Length)
+                             .Where(x => x % 2 == 0)
+                             .Select(x => Convert.ToByte(hex.Substring(x, 2), 16))
+                             .ToArray();
+        }
+
+        private byte[] GetHelloWorld()
+        {
+            return StringToByteArray("68-65-6C-6C-6F-20-77-6F-72-6C-64");
+        }
+
+        private byte[] GetHelloWorldAgain()
+        {
+            return StringToByteArray("68-65-6C-6C-6F-20-61-67-61-69-6E-20-77-6F-72-6C-64");
+        }
+
+        public void Dispose()
+        {
+            int numTempFiles = Directory.GetFiles(Path.Combine(Path.GetTempPath(), "CdFileMgr")).Length;
+            Assert.Equal(_numTempFiles, numTempFiles);
+        }
 
         #region Operations
         [Fact]
@@ -40,7 +59,6 @@ namespace ChinhDo.Transactions.FileManagerTest
                     _target.AppendAllText(f1, contents);
                     scope1.Complete();
                 }
-                //Assert.Equal(contents, File.ReadAllText(f1), "Incorrect value for ReadAllText.");
                 Assert.Equal(contents, File.ReadAllText(f1));
             }
             finally
@@ -49,27 +67,30 @@ namespace ChinhDo.Transactions.FileManagerTest
             }
         }
 
-        //[Fact, ExpectedException(typeof(IOException))]
-        //public void CannotAppendText()
-        //{
-        //    string f1 = _target.GetTempFileName();
-        //    const string contents = "123";
+        [Fact]
+        public void CannotAppendText()
+        {
+            string f1 = _target.GetTempFileName();
+            const string contents = "123";
 
-        //    try
-        //    {
-        //        using (TransactionScope scope1 = new TransactionScope())
-        //        {
-        //            using (FileStream fs = File.Open(f1, FileMode.OpenOrCreate, FileAccess.Read, FileShare.None))
-        //            {
-        //                _target.AppendAllText(f1, contents);
-        //            }
-        //        }
-        //    }
-        //    finally
-        //    {
-        //        File.Delete(f1);
-        //    }
-        //}
+            Assert.Throws<IOException>(() =>
+            {
+                try
+                {
+                    using (TransactionScope scope1 = new TransactionScope())
+                    {
+                        using (FileStream fs = File.Open(f1, FileMode.OpenOrCreate, FileAccess.Read, FileShare.None))
+                        {
+                            _target.AppendAllText(f1, contents);
+                        }
+                    }
+                }
+                finally
+                {
+                    File.Delete(f1);
+                }
+            });
+        }
 
         [Fact]
         public void CanAppendTextAndRollback()
@@ -154,9 +175,6 @@ namespace ChinhDo.Transactions.FileManagerTest
             }
         }
 
-        /// <summary>
-        /// Validate that we are able to create nested directotories and roll them back.
-        /// </summary>
         [Fact]
         public void CanRollbackNestedDirectories()
         {
@@ -418,6 +436,52 @@ namespace ChinhDo.Transactions.FileManagerTest
             }            
         }
 
+        [Fact]
+        public void CanWriteAllBytes()
+        {
+            string f1 = _target.GetTempFileName();
+            try
+            {
+                byte[] contents = GetHelloWorldAgain();
+                File.WriteAllBytes(f1, GetHelloWorld());
+
+                using (TransactionScope scope1 = new TransactionScope())
+                {
+                    _target.WriteAllBytes(f1, contents);
+                    scope1.Complete();
+                }
+
+                Assert.Equal(contents, File.ReadAllBytes(f1));
+            }
+            finally
+            {
+                File.Delete(f1);
+            }
+        }
+
+        [Fact]
+        public void CanWriteAllBytesAndRollback()
+        {
+            string f1 = _target.GetTempFileName();
+            try
+            {
+                byte[] contents1 = GetHelloWorld();
+                byte[] contents2 = GetHelloWorldAgain();
+                File.WriteAllBytes(f1, contents1);
+
+                using (TransactionScope scope1 = new TransactionScope())
+                {
+                    _target.WriteAllBytes(f1, contents2);
+                }
+
+                Assert.Equal(contents1, File.ReadAllBytes(f1));
+            }
+            finally
+            {
+                File.Delete(f1);
+            }
+        }
+
         #endregion
 
         #region Error Handling
@@ -462,32 +526,35 @@ namespace ChinhDo.Transactions.FileManagerTest
 
         #region Transaction Support
 
-        //[Fact, ExpectedException(typeof(TransactionException))]
-        //public void CannotRollback()
-        //{
-        //    string f1 = _target.GetTempFileName(".txt");
-        //    string f2 = _target.GetTempFileName(".txt");
+        [Fact]
+        public void CannotRollback()
+        {
+            string f1 = _target.GetTempFileName(".txt");
+            string f2 = _target.GetTempFileName(".txt");
 
-        //    try
-        //    {
-        //        using (TransactionScope scope1 = new TransactionScope())
-        //        {
-        //            _target.WriteAllText(f1, "Test.");
-        //            _target.WriteAllText(f2, "Test.");
+            Assert.Throws<TransactionException>(() =>
+            {
+                try
+                {
+                    using (TransactionScope scope1 = new TransactionScope())
+                    {
+                        _target.WriteAllText(f1, "Test.");
+                        _target.WriteAllText(f2, "Test.");
 
-        //            FileInfo fi1 = new FileInfo(f1);
-        //            fi1.Attributes = FileAttributes.ReadOnly;
+                        FileInfo fi1 = new FileInfo(f1);
+                        fi1.Attributes = FileAttributes.ReadOnly;
 
-        //            // rollback
-        //        }
-        //    }
-        //    finally
-        //    {
-        //        FileInfo fi1 = new FileInfo(f1);
-        //        fi1.Attributes = FileAttributes.Normal;
-        //        File.Delete(f1);
-        //    }
-        //}
+                        // rollback
+                    }
+                }
+                finally
+                {
+                    FileInfo fi1 = new FileInfo(f1);
+                    fi1.Attributes = FileAttributes.Normal;
+                    File.Delete(f1);
+                }
+            });
+        }
 
         [Fact]
         public void CanReuseManager()
@@ -632,5 +699,6 @@ namespace ChinhDo.Transactions.FileManagerTest
         }
 
         #endregion
+
     }
 }

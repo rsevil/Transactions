@@ -27,13 +27,9 @@ namespace ChinhDo.Transactions
         public void AppendAllText(string path, string contents)
         {
             if (IsInTransaction())
-            {
                 EnlistOperation(new AppendAllTextOperation(path, contents));
-            }
             else
-            {
                 File.AppendAllText(path, contents);
-            }
         }
 
         /// <summary>Copies the specified <paramref name="sourceFileName"/> to <paramref name="destFileName"/>.</summary>
@@ -43,13 +39,9 @@ namespace ChinhDo.Transactions
         public void Copy(string sourceFileName, string destFileName, bool overwrite)
         {
             if (IsInTransaction())
-            {
                 EnlistOperation(new CopyOperation(sourceFileName, destFileName, overwrite));
-            }
             else
-            {
                 File.Copy(sourceFileName, destFileName, overwrite);
-            }
         }
 
         /// <summary>Creates all directories in the specified path.</summary>
@@ -57,13 +49,9 @@ namespace ChinhDo.Transactions
         public void CreateDirectory(string path)
         {
             if (IsInTransaction())
-            {
                 EnlistOperation(new CreateDirectoryOperation(path));
-            }
             else
-            {
                 Directory.CreateDirectory(path);
-            }
         }
 
         /// <summary>Deletes the specified file. An exception is not thrown if the file does not exist.</summary>
@@ -71,13 +59,9 @@ namespace ChinhDo.Transactions
         public void Delete(string path)
         {
             if (IsInTransaction())
-            {
                 EnlistOperation(new DeleteFileOperation(path));
-            }
             else
-            {
                 File.Delete(path);
-            }
         }
 
         /// <summary>Deletes the specified directory and all its contents. An exception is not thrown if the directory does not exist.</summary>
@@ -85,13 +69,9 @@ namespace ChinhDo.Transactions
         public void DeleteDirectory(string path)
         {
             if (IsInTransaction())
-            {
                 EnlistOperation(new DeleteDirectoryOperation(path));
-            }
             else
-            {
                 Directory.Delete(path, true);
-            }
         }
 
         /// <summary>Moves the specified file to a new location.</summary>
@@ -100,13 +80,9 @@ namespace ChinhDo.Transactions
         public void Move(string srcFileName, string destFileName)
         {
             if (IsInTransaction())
-            {
                 EnlistOperation(new MoveOperation(srcFileName, destFileName));
-            }
             else
-            {
                 File.Move(srcFileName, destFileName);
-            }
         }
 
         /// <summary>Take a snapshot of the specified file. The snapshot is used to rollback the file later if needed.</summary>
@@ -114,9 +90,7 @@ namespace ChinhDo.Transactions
         public void Snapshot(string fileName)
         {
             if (IsInTransaction())
-            {
                 EnlistOperation(new SnapshotOperation(fileName));
-            }
         }
 
         /// <summary>Creates a file, write the specified <paramref name="contents"/> to the file.</summary>
@@ -125,13 +99,9 @@ namespace ChinhDo.Transactions
         public void WriteAllText(string path, string contents)
         {
             if (IsInTransaction())
-            {
                 EnlistOperation(new WriteAllTextOperation(path, contents));
-            }
             else
-            {
                 File.WriteAllText(path, contents);
-            }
         }
 
         /// <summary>Creates a file, write the specified <paramref name="contents"/> to the file.</summary>
@@ -140,13 +110,9 @@ namespace ChinhDo.Transactions
         public void WriteAllBytes(string path, byte[] contents)
         {
             if (IsInTransaction())
-            {
                 EnlistOperation(new WriteAllBytesOperation(path, contents));
-            }
             else
-            {
                 File.WriteAllBytes(path, contents);
-            }
         }
 
         #endregion

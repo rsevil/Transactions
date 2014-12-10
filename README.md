@@ -6,7 +6,7 @@ Transactional File Manager is a .NET API that supports including file system ope
 
 This library allows you to wrap file system operations in transactions like this: 
 
-```csharp
+``` csharp
 // Wrap a file copy and a database insert in the same transaction
 TxFileManager fileMgr = new TxFileManager();
 using (TransactionScope scope1 = new TransactionScope())

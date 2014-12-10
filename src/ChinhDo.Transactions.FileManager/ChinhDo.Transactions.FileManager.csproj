@@ -8,8 +8,8 @@
     <ProjectGuid>{E824ACBB-90C8-4C60-9D52-9C8020E98E3E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ChinhDo.Transactions</RootNamespace>
-    <AssemblyName>ChinhDo.Transactions</AssemblyName>
+    <RootNamespace>ChinhDo.Transactions.FileManager</RootNamespace>
+    <AssemblyName>ChinhDo.Transactions.FileManager</AssemblyName>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
@@ -43,7 +43,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\ChinhDo.Transactions.XML</DocumentationFile>
+    <DocumentationFile>bin\Debug\ChinhDo.Transactions.FileManager.xml</DocumentationFile>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>

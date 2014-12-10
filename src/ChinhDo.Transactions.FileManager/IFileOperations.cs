@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ChinhDo.Transactions
+namespace ChinhDo.Transactions.FileManager
 {
     /// <summary>
     /// Classes implementing this interface provide methods to manipulate files.

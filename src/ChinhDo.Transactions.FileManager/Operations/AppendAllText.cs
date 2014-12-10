@@ -1,7 +1,7 @@
 ﻿using ChinhDo.Transactions.Utils;
 using System.IO;
 
-namespace ChinhDo.Transactions.Operations
+namespace ChinhDo.Transactions.FileManager.Operations
 {
     /// <summary>
     /// Rollbackable operation which appends a string to an existing file, or creates the file if it doesn't exist.

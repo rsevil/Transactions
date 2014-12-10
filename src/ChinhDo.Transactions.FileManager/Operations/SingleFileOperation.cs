@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace ChinhDo.Transactions.Operations
+namespace ChinhDo.Transactions.FileManager.Operations
 {
     /// <summary>
     /// Class that contains common code for those rollbackable file operations which need

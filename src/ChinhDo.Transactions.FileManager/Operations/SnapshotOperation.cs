@@ -1,7 +1,7 @@
 ﻿using ChinhDo.Transactions.Utils;
 using System.IO;
 
-namespace ChinhDo.Transactions.Operations
+namespace ChinhDo.Transactions.FileManager.Operations
 {
     /// <summary>
     /// Rollbackable operation which takes a snapshot of a file. The snapshot is used to rollback the file later if needed.

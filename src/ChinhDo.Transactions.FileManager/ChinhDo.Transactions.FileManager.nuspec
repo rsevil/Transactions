@@ -11,6 +11,6 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <copyright>Copyright 2014</copyright>
-    <tags>.net4 transactionscope file </tags>
+    <tags>.net4 transactionscope filemanager </tags>
   </metadata>
 </package>

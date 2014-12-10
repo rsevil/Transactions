@@ -1,9 +1,9 @@
-using ChinhDo.Transactions.Operations;
+using ChinhDo.Transactions.FileManager.Operations;
 using System;
 using System.Collections.Generic;
 using System.Transactions;
 
-namespace ChinhDo.Transactions
+namespace ChinhDo.Transactions.FileManager
 {
     /// <summary>Provides two-phase commits/rollbacks/etc for a single <see cref="Transaction"/>.</summary>
     sealed class TxEnlistment : IEnlistmentNotification

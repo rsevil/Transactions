@@ -2,7 +2,7 @@
 using System;
 using System.IO;
 
-namespace ChinhDo.Transactions.Operations
+namespace ChinhDo.Transactions.FileManager.Operations
 {
     /// <summary>
     /// Deletes the specified directory and all its contents.

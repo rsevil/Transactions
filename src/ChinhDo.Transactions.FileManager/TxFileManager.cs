@@ -1,11 +1,11 @@
-using ChinhDo.Transactions.Operations;
+using ChinhDo.Transactions.FileManager.Operations;
 using ChinhDo.Transactions.Utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Transactions;
 
-namespace ChinhDo.Transactions
+namespace ChinhDo.Transactions.FileManager
 {
     /// <summary>
     /// File Resource Manager. Allows inclusion of file system operations in transactions.

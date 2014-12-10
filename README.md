@@ -37,63 +37,64 @@ using (TransactionScope scope1 = new TransactionScope())
 This library supports any file system and is not a wrapper over Transactional NTFS (see [AlphaFS](http://alphafs.codeplex.com/)).
 
 ## Examples ##
+``` csharp
+// Completely unrealistic example showing how various file operations, including operations done 
+// by library/3rd party code, can participate in transactions.
+IFileManager fileManager = new TxFileManager();
+using (TransactionScope scope1 = new TransactionScope())
+{
+    fileManager.WriteAllText(inFileName, xml);
 
-	// Completely unrealistic example showing how various file operations, including operations done 
-	// by library/3rd party code, can participate in transactions.
-	IFileManager fileManager = new TxFileManager();
-	using (TransactionScope scope1 = new TransactionScope())
-	{
-	    fileManager.WriteAllText(inFileName, xml);
-	
-	    // Snapshot allows any file operation to be part of our transaction.
-	    // All we need to know is the file name.
-	    //The statement below tells the TxFileManager to remember the state of this file.
-	    // So even though XslCompiledTransform has no knowledge of our TxFileManager, the file it creates (outFileName)
-	    // will still be restored to this state in the event of a rollback.
-	    fileManager.Snapshot(outFileName);
-	    XslCompiledTransform xsl = new XslCompiledTransform(true);
-	    xsl.Load(uri);
-	    xsl.Transform(inFileName, outFileName);
-	
-	    // write to database 1. This database op will get committed/rolled back along with the file operations we are doing in this transaction.
-	    myDb1.ExecuteNonQuery(sql1);
-	
-	    // write to database 2. The transaction is promoted to a distributed transaction here.
-	    myDb2.ExecuteNonQuery(sql2);
-	
-	    // let's delete some files
-	    for (string fileName in filesToDelete)
-	    {
-	        fileManager.Delete(fileName);
-	    }
-	
-	    // Just for kicks, let's start a new nested  transaction. Since we specify RequiresNew here, this nested transaction
-	    // will be committed/rolled back separately from the main transaction.
-	    // Note that we can still use the same fileManager instance. It knows how to sort things out correctly.
-	    using (TransactionScope scope2 = new TransactionScope(TransactionScopeOptions.RequiresNew))
-	    {
-	        fileManager.MoveFile(anotherFile, anotherFileDest);
-	    }
-	
-	    // move some files
-	    for (string fileName in filesToMove)
-	    {
-	        fileManager.Move(fileName, GetNewFileName(fileName));
-	    }
-	
-	    // Finally, let's create a few temporary files...
-	    // disk space has to be used for something.
-	    // The nice thing about FileManager.GetTempFileName is that
-	    // The temp file will be cleaned up automatically for you when the TransactionScope completes.
-	    // No more worries about temp files that get left behind.
-	    for (int i=0; i<10; i++)
-	    {
-	        fileManager.WriteAllText(fileManager.GetTempFileName(), "testing 1 2");
-	    }
-	
-	    scope1.Complete();
-	    // In the event an exception occurs, everything done here will be rolled back including the output xsl file.
-	}
+    // Snapshot allows any file operation to be part of our transaction.
+    // All we need to know is the file name.
+    //The statement below tells the TxFileManager to remember the state of this file.
+    // So even though XslCompiledTransform has no knowledge of our TxFileManager, the file it creates (outFileName)
+    // will still be restored to this state in the event of a rollback.
+    fileManager.Snapshot(outFileName);
+    XslCompiledTransform xsl = new XslCompiledTransform(true);
+    xsl.Load(uri);
+    xsl.Transform(inFileName, outFileName);
+
+    // write to database 1. This database op will get committed/rolled back along with the file operations we are doing in this transaction.
+    myDb1.ExecuteNonQuery(sql1);
+
+    // write to database 2. The transaction is promoted to a distributed transaction here.
+    myDb2.ExecuteNonQuery(sql2);
+
+    // let's delete some files
+    for (string fileName in filesToDelete)
+    {
+        fileManager.Delete(fileName);
+    }
+
+    // Just for kicks, let's start a new nested  transaction. Since we specify RequiresNew here, this nested transaction
+    // will be committed/rolled back separately from the main transaction.
+    // Note that we can still use the same fileManager instance. It knows how to sort things out correctly.
+    using (TransactionScope scope2 = new TransactionScope(TransactionScopeOptions.RequiresNew))
+    {
+        fileManager.MoveFile(anotherFile, anotherFileDest);
+    }
+
+    // move some files
+    for (string fileName in filesToMove)
+    {
+        fileManager.Move(fileName, GetNewFileName(fileName));
+    }
+
+    // Finally, let's create a few temporary files...
+    // disk space has to be used for something.
+    // The nice thing about FileManager.GetTempFileName is that
+    // The temp file will be cleaned up automatically for you when the TransactionScope completes.
+    // No more worries about temp files that get left behind.
+    for (int i=0; i<10; i++)
+    {
+        fileManager.WriteAllText(fileManager.GetTempFileName(), "testing 1 2");
+    }
+
+    scope1.Complete();
+    // In the event an exception occurs, everything done here will be rolled back including the output xsl file.
+}
+```
 
 
 This is an open source project. The original project web site is [transactionalfilemgr](https://transactionalfilemgr.codeplex.com).

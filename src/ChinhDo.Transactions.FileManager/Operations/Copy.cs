@@ -1,11 +1,12 @@
-﻿using System.IO;
+﻿using ChinhDo.Transactions.Utils;
+using System.IO;
 
-namespace ChinhDo.Transactions
+namespace ChinhDo.Transactions.Operations
 {
     /// <summary>
     /// Rollbackable operation which copies a file.
     /// </summary>
-    sealed class CopyOperation : SingleFileOperation
+    sealed class Copy : SingleFileOperation
     {
         private readonly string sourceFileName;
         private readonly bool overwrite;
@@ -16,7 +17,7 @@ namespace ChinhDo.Transactions
         /// <param name="sourceFileName">The file to copy.</param>
         /// <param name="destFileName">The name of the destination file.</param>
         /// <param name="overwrite">true if the destination file can be overwritten, otherwise false.</param>
-        public CopyOperation(string sourceFileName, string destFileName, bool overwrite)
+        public Copy(string sourceFileName, string destFileName, bool overwrite)
             : base(destFileName)
         {
             this.sourceFileName = sourceFileName;

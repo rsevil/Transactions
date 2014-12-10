@@ -1,12 +1,13 @@
-﻿using System;
+﻿using ChinhDo.Transactions.Utils;
+using System;
 using System.IO;
 
-namespace ChinhDo.Transactions
+namespace ChinhDo.Transactions.Operations
 {
     /// <summary>
     /// Deletes the specified directory and all its contents.
     /// </summary>
-    sealed class DeleteDirectoryOperation : IRollbackableOperation, IDisposable
+    sealed class DeleteDirectory : IRollbackableOperation, IDisposable
     {
         private readonly string path;
         private string backupPath;
@@ -17,7 +18,7 @@ namespace ChinhDo.Transactions
         /// Instantiates the class.
         /// </summary>
         /// <param name="path">The directory path to delete.</param>
-        public DeleteDirectoryOperation(string path)
+        public DeleteDirectory(string path)
         {
             this.path = path;
         }
@@ -25,7 +26,7 @@ namespace ChinhDo.Transactions
         /// <summary>
         /// Disposes the resources used by this class.
         /// </summary>
-        ~DeleteDirectoryOperation()
+        ~DeleteDirectory()
         {
             InnerDispose();
         }

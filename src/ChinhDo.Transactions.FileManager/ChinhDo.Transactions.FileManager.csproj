@@ -64,24 +64,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppendAllTextOperation.cs" />
-    <Compile Include="CopyOperation.cs" />
-    <Compile Include="CreateDirectoryOperation.cs" />
-    <Compile Include="DeleteDirectoryOperation.cs" />
-    <Compile Include="DeleteFileOperation.cs" />
+    <Compile Include="Operations\AppendAllText.cs" />
+    <Compile Include="Operations\Copy.cs" />
+    <Compile Include="Operations\CreateDirectory.cs" />
+    <Compile Include="Operations\DeleteDirectory.cs" />
+    <Compile Include="Operations\DeleteFile.cs" />
     <Compile Include="FileEventHandler.cs" />
-    <Compile Include="SingleFileOperation.cs" />
-    <Compile Include="MoveOperation.cs" />
-    <Compile Include="IRollbackableOperation.cs" />
-    <Compile Include="SnapshotOperation.cs" />
+    <Compile Include="Operations\SingleFileOperation.cs" />
+    <Compile Include="Operations\Move.cs" />
+    <Compile Include="Operations\IRollbackableOperation.cs" />
+    <Compile Include="Operations\SnapshotOperation.cs" />
     <Compile Include="TxFileManager.cs" />
     <Compile Include="IFileManager.cs" />
     <Compile Include="IFileOperations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TxEnlistment.cs" />
-    <Compile Include="FileUtils.cs" />
-    <Compile Include="WriteAllBytesOperation.cs" />
-    <Compile Include="WriteAllTextOperation.cs" />
+    <Compile Include="Utils\FileUtils.cs" />
+    <Compile Include="Operations\WriteAllBytes.cs" />
+    <Compile Include="Operations\WriteAllText.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

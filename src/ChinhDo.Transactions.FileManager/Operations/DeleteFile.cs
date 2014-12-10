@@ -1,17 +1,19 @@
-﻿using System.IO;
+﻿using ChinhDo.Transactions.Utils;
+using System.IO;
 
-namespace ChinhDo.Transactions
+namespace ChinhDo.Transactions.Operations
 {
     /// <summary>
-    /// Rollbackable operation which takes a snapshot of a file. The snapshot is used to rollback the file later if needed.
+    /// Rollbackable operation which deletes a file. An exception is not thrown if the file does not exist.
     /// </summary>
-    sealed class SnapshotOperation: SingleFileOperation
+    sealed class DeleteFile : SingleFileOperation
     {
         /// <summary>
         /// Instantiates the class.
         /// </summary>
-        /// <param name="path">The file to take a snapshot for.</param>
-        public SnapshotOperation(string path) : base(path)
+        /// <param name="path">The file to be deleted.</param>
+        public DeleteFile(string path)
+            : base(path)
         {
         }
 
@@ -23,6 +25,8 @@ namespace ChinhDo.Transactions
                 File.Copy(path, temp);
                 backupPath = temp;
             }
+
+            File.Delete(path);
         }
     }
 }

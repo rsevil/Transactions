@@ -1,20 +1,21 @@
-﻿using System.IO;
+﻿using ChinhDo.Transactions.Utils;
+using System.IO;
 
-namespace ChinhDo.Transactions
+namespace ChinhDo.Transactions.Operations
 {
     /// <summary>
     /// Creates a file, and writes the specified contents to it.
     /// </summary>
-    sealed class WriteAllTextOperation : SingleFileOperation
+    sealed class WriteAllBytes : SingleFileOperation
     {
-        private readonly string contents;
+        private readonly byte[] contents;
 
         /// <summary>
         /// Instantiates the class.
         /// </summary>
         /// <param name="path">The file to write to.</param>
         /// <param name="contents">The string to write to the file.</param>
-        public WriteAllTextOperation(string path, string contents)
+        public WriteAllBytes(string path, byte[] contents)
             : base(path)
         {
             this.contents = contents;
@@ -29,7 +30,7 @@ namespace ChinhDo.Transactions
                 backupPath = temp;
             }
 
-            File.WriteAllText(path, contents);
+            File.WriteAllBytes(path, contents);
         }
     }
 }

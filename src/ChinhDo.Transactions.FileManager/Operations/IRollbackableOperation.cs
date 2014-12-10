@@ -1,4 +1,4 @@
-﻿namespace ChinhDo.Transactions
+﻿namespace ChinhDo.Transactions.Operations
 {
     /// <summary>
     /// Represents a transactional file operation.

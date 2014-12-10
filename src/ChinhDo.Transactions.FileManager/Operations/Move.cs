@@ -1,11 +1,11 @@
 ﻿using System.IO;
 
-namespace ChinhDo.Transactions
+namespace ChinhDo.Transactions.Operations
 {
     /// <summary>
     /// Rollbackable operation which moves a file to a new location.
     /// </summary>
-    sealed class MoveOperation : IRollbackableOperation
+    sealed class Move : IRollbackableOperation
     {
         private readonly string sourceFileName;
         private readonly string destFileName;
@@ -15,7 +15,7 @@ namespace ChinhDo.Transactions
         /// </summary>
         /// <param name="sourceFileName">The name of the file to move.</param>
         /// <param name="destFileName">The new path for the file.</param>
-        public MoveOperation(string sourceFileName, string destFileName)
+        public Move(string sourceFileName, string destFileName)
         {
             this.sourceFileName = sourceFileName;
             this.destFileName = destFileName;

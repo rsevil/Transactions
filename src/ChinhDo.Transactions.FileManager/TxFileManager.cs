@@ -1,3 +1,5 @@
+using ChinhDo.Transactions.Operations;
+using ChinhDo.Transactions.Utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -27,7 +29,7 @@ namespace ChinhDo.Transactions
         public void AppendAllText(string path, string contents)
         {
             if (IsInTransaction())
-                EnlistOperation(new AppendAllTextOperation(path, contents));
+                EnlistOperation(new AppendAllText(path, contents));
             else
                 File.AppendAllText(path, contents);
         }
@@ -39,7 +41,7 @@ namespace ChinhDo.Transactions
         public void Copy(string sourceFileName, string destFileName, bool overwrite)
         {
             if (IsInTransaction())
-                EnlistOperation(new CopyOperation(sourceFileName, destFileName, overwrite));
+                EnlistOperation(new Copy(sourceFileName, destFileName, overwrite));
             else
                 File.Copy(sourceFileName, destFileName, overwrite);
         }
@@ -49,7 +51,7 @@ namespace ChinhDo.Transactions
         public void CreateDirectory(string path)
         {
             if (IsInTransaction())
-                EnlistOperation(new CreateDirectoryOperation(path));
+                EnlistOperation(new CreateDirectory(path));
             else
                 Directory.CreateDirectory(path);
         }
@@ -59,7 +61,7 @@ namespace ChinhDo.Transactions
         public void Delete(string path)
         {
             if (IsInTransaction())
-                EnlistOperation(new DeleteFileOperation(path));
+                EnlistOperation(new DeleteFile(path));
             else
                 File.Delete(path);
         }
@@ -69,7 +71,7 @@ namespace ChinhDo.Transactions
         public void DeleteDirectory(string path)
         {
             if (IsInTransaction())
-                EnlistOperation(new DeleteDirectoryOperation(path));
+                EnlistOperation(new DeleteDirectory(path));
             else
                 Directory.Delete(path, true);
         }
@@ -80,7 +82,7 @@ namespace ChinhDo.Transactions
         public void Move(string srcFileName, string destFileName)
         {
             if (IsInTransaction())
-                EnlistOperation(new MoveOperation(srcFileName, destFileName));
+                EnlistOperation(new Move(srcFileName, destFileName));
             else
                 File.Move(srcFileName, destFileName);
         }
@@ -90,7 +92,7 @@ namespace ChinhDo.Transactions
         public void Snapshot(string fileName)
         {
             if (IsInTransaction())
-                EnlistOperation(new SnapshotOperation(fileName));
+                EnlistOperation(new Snapshot(fileName));
         }
 
         /// <summary>Creates a file, write the specified <paramref name="contents"/> to the file.</summary>
@@ -99,7 +101,7 @@ namespace ChinhDo.Transactions
         public void WriteAllText(string path, string contents)
         {
             if (IsInTransaction())
-                EnlistOperation(new WriteAllTextOperation(path, contents));
+                EnlistOperation(new WriteAllText(path, contents));
             else
                 File.WriteAllText(path, contents);
         }
@@ -110,7 +112,7 @@ namespace ChinhDo.Transactions
         public void WriteAllBytes(string path, byte[] contents)
         {
             if (IsInTransaction())
-                EnlistOperation(new WriteAllBytesOperation(path, contents));
+                EnlistOperation(new WriteAllBytes(path, contents));
             else
                 File.WriteAllBytes(path, contents);
         }

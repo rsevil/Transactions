@@ -1,11 +1,11 @@
 ﻿using System.IO;
 
-namespace ChinhDo.Transactions
+namespace ChinhDo.Transactions.Operations
 {
     /// <summary>
     /// Creates all directories in the specified path.
     /// </summary>
-    sealed class CreateDirectoryOperation : IRollbackableOperation
+    sealed class CreateDirectory : IRollbackableOperation
     {
         private readonly string path;
         private string backupPath;
@@ -14,7 +14,7 @@ namespace ChinhDo.Transactions
         /// Instantiates the class.
         /// </summary>
         /// <param name="path">The directory path to create.</param>
-        public CreateDirectoryOperation(string path)
+        public CreateDirectory(string path)
         {
             this.path = path;
         }

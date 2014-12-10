@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace ChinhDo.Transactions
+namespace ChinhDo.Transactions.Utils
 {
     static class FileUtils
     {

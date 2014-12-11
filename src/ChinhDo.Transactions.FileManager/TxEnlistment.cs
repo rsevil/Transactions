@@ -8,7 +8,7 @@ namespace ChinhDo.Transactions.FileManager
     /// <summary>Provides two-phase commits/rollbacks/etc for a single <see cref="Transaction"/>.</summary>
     sealed class TxEnlistment : IEnlistmentNotification
     {
-        private readonly List<IRollbackableOperation> _journal = new List<IRollbackableOperation>();
+        private readonly List<IRollbackable> _journal = new List<IRollbackable>();
 
         /// <summary>Initializes a new instance of the <see cref="TxEnlistment"/> class.</summary>
         /// <param name="tx">The Transaction.</param>
@@ -27,6 +27,15 @@ namespace ChinhDo.Transactions.FileManager
             operation.Execute();
 
             _journal.Add(operation);
+        }
+
+        public T EnlistOperation<T>(IRollbackableOperation<T> operation)
+        {
+            var r = operation.Execute();
+
+            _journal.Add(operation);
+
+            return r;
         }
 
         public void Commit(Enlistment enlistment)

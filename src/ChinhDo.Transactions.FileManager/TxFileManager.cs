@@ -98,23 +98,37 @@ namespace ChinhDo.Transactions.FileManager
         /// <summary>Creates a file, write the specified <paramref name="contents"/> to the file.</summary>
         /// <param name="path">The file to write to.</param>
         /// <param name="contents">The string to write to the file.</param>
-        public void WriteAllText(string path, string contents)
+        /// <param name="renameIfExists">Rename the file if a file with that filename exists, otherwise overwrite.</param>
+        /// <returns>The full file path of the file</returns>
+        public string WriteAllText(string path, string contents, bool renameIfExists = false)
         {
             if (IsInTransaction())
-                EnlistOperation(new WriteAllText(path, contents));
+            {
+                return EnlistOperation(new WriteAllText(path, contents, renameIfExists));
+            }
             else
+            {
                 File.WriteAllText(path, contents);
+                return path;
+            }
         }
 
         /// <summary>Creates a file, write the specified <paramref name="contents"/> to the file.</summary>
         /// <param name="path">The file to write to.</param>
         /// <param name="contents">The bytes to write to the file.</param>
-        public void WriteAllBytes(string path, byte[] contents)
+        /// <param name="renameIfExists">Rename the file if a file with that filename exists, otherwise overwrite.</param>
+        /// <returns>The full file path of the file</returns>
+        public string WriteAllBytes(string path, byte[] contents, bool renameIfExists = false)
         {
             if (IsInTransaction())
-                EnlistOperation(new WriteAllBytes(path, contents));
+            {
+                return EnlistOperation(new WriteAllBytes(path, contents, renameIfExists));
+            }
             else
+            {
                 File.WriteAllBytes(path, contents);
+                return path;
+            }
         }
 
         #endregion
@@ -230,6 +244,27 @@ namespace ChinhDo.Transactions.FileManager
                     _enlistments.Add(tx.TransactionInformation.LocalIdentifier, enlistment);
                 }
                 enlistment.EnlistOperation(operation);
+            }
+        }
+
+        private static T EnlistOperation<T>(IRollbackableOperation<T> operation)
+        {
+            Transaction tx = Transaction.Current;
+            TxEnlistment enlistment;
+
+            lock (_enlistmentsLock)
+            {
+                if (_enlistments == null)
+                {
+                    _enlistments = new Dictionary<string, TxEnlistment>();
+                }
+
+                if (!_enlistments.TryGetValue(tx.TransactionInformation.LocalIdentifier, out enlistment))
+                {
+                    enlistment = new TxEnlistment(tx);
+                    _enlistments.Add(tx.TransactionInformation.LocalIdentifier, enlistment);
+                }
+                return enlistment.EnlistOperation(operation);
             }
         }
 

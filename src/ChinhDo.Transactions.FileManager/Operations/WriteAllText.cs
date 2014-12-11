@@ -6,22 +6,25 @@ namespace ChinhDo.Transactions.FileManager.Operations
     /// <summary>
     /// Creates a file, and writes the specified contents to it.
     /// </summary>
-    sealed class WriteAllText : SingleFileOperation
+    sealed class WriteAllText : SingleFileOperation<string>
     {
         private readonly string contents;
+        private readonly bool renameIfExists;
 
         /// <summary>
         /// Instantiates the class.
         /// </summary>
         /// <param name="path">The file to write to.</param>
         /// <param name="contents">The string to write to the file.</param>
-        public WriteAllText(string path, string contents)
+        /// <param name="renameIfExists">Rename the file if a file with that filename exists, otherwise overwrite.</param>
+        public WriteAllText(string path, string contents, bool renameIfExists)
             : base(path)
         {
             this.contents = contents;
+            this.renameIfExists = renameIfExists;
         }
 
-        public override void Execute()
+        public override string Execute()
         {
             if (File.Exists(path))
             {
@@ -31,6 +34,8 @@ namespace ChinhDo.Transactions.FileManager.Operations
             }
 
             File.WriteAllText(path, contents);
+
+            return path;
         }
     }
 }

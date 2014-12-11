@@ -60,13 +60,17 @@ namespace ChinhDo.Transactions.FileManager
         /// </summary>
         /// <param name="path">The file to write to.</param>
         /// <param name="contents">The string to write to the file.</param>
-        void WriteAllText(string path, string contents);
+        /// <param name="renameIfExists">Rename the file if a file with that filename exists, otherwise overwrite.</param>
+        /// <returns>The full file path of the file</returns>
+        string WriteAllText(string path, string contents, bool renameIfExists = false);
 
         /// <summary>
         /// Creates a file, write the specified <paramref name="contents"/> to the file.
         /// </summary>
         /// <param name="path">The file to write to.</param>
         /// <param name="contents">The bytes to write to the file.</param>
-        void WriteAllBytes(string path, byte[] contents);
+        /// <param name="renameIfExists">Rename the file if a file with that filename exists, otherwise overwrite.</param>
+        /// <returns>The full file path of the file</returns>
+        string WriteAllBytes(string path, byte[] contents, bool renameIfExists = false);
     }
 }

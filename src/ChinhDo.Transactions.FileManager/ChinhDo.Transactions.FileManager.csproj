@@ -70,6 +70,11 @@
     <Compile Include="Operations\DeleteDirectory.cs" />
     <Compile Include="Operations\DeleteFile.cs" />
     <Compile Include="FileEventHandler.cs" />
+    <Compile Include="Operations\IOperation.cs" />
+    <Compile Include="Operations\IOperationOfT.cs" />
+    <Compile Include="Operations\IRollbackable.cs" />
+    <Compile Include="Operations\IRollbackableOperationOfT.cs" />
+    <Compile Include="Operations\SingleFileOperationOfT.cs" />
     <Compile Include="Operations\SingleFileOperation.cs" />
     <Compile Include="Operations\Move.cs" />
     <Compile Include="Operations\IRollbackableOperation.cs" />

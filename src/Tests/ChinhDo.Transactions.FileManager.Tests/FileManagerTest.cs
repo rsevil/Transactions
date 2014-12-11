@@ -389,6 +389,31 @@ namespace ChinhDo.Transactions.FileManager.Tests
         }
 
         [Fact]
+        public void CanWriteAllTextAndRename()
+        {
+            string f1 = _target.GetTempFileName();
+            string f2 = string.Empty;
+            try
+            {
+                const string contents = "abcdef";
+                File.WriteAllText(f1, "123");
+
+                using (TransactionScope scope1 = new TransactionScope())
+                {
+                    f2 = _target.WriteAllText(f1, contents, renameIfExists: true);
+                    scope1.Complete();
+                }
+
+                Assert.Equal(contents, File.ReadAllText(f1));
+                Assert.NotEqual(f2, f1);
+            }
+            finally
+            {
+                File.Delete(f1);
+            }
+        }
+
+        [Fact]
         public void CanWriteAllTextAndRollback()
         {
             string f1 = _target.GetTempFileName();
@@ -404,6 +429,31 @@ namespace ChinhDo.Transactions.FileManager.Tests
                 }
 
                 Assert.Equal(contents1, File.ReadAllText(f1));
+            }
+            finally
+            {
+                File.Delete(f1);
+            }
+        }
+
+        [Fact]
+        public void CanWriteAllTextAndRenameAndRollback()
+        {
+            string f1 = _target.GetTempFileName();
+            string f2 = string.Empty;
+            try
+            {
+                const string contents1 = "123";
+                const string contents2 = "abcdef";
+                File.WriteAllText(f1, contents1);
+
+                using (TransactionScope scope1 = new TransactionScope())
+                {
+                    f2 = _target.WriteAllText(f1, contents2, renameIfExists: true);
+                }
+
+                Assert.Equal(contents1, File.ReadAllText(f1));
+                Assert.NotEqual(f2, f1);
             }
             finally
             {
@@ -452,6 +502,56 @@ namespace ChinhDo.Transactions.FileManager.Tests
                 }
 
                 Assert.Equal(contents, File.ReadAllBytes(f1));
+            }
+            finally
+            {
+                File.Delete(f1);
+            }
+        }
+
+        [Fact]
+        public void CanWriteAllBytesAndRename()
+        {
+            string f1 = _target.GetTempFileName();
+            string f2 = string.Empty;
+            try
+            {
+                byte[] contents = GetHelloWorldAgain();
+                File.WriteAllBytes(f1, GetHelloWorld());
+
+                using (TransactionScope scope1 = new TransactionScope())
+                {
+                    f2 = _target.WriteAllBytes(f1, contents, renameIfExists:true);
+                    scope1.Complete();
+                }
+
+                Assert.Equal(contents, File.ReadAllBytes(f1));
+                Assert.NotEqual(f2, f1);
+            }
+            finally
+            {
+                File.Delete(f1);
+            }
+        }
+
+        [Fact]
+        public void CanWriteAllBytesAndRenameAndRollback()
+        {
+            string f1 = _target.GetTempFileName();
+            string f2 = string.Empty;
+            try
+            {
+                byte[] contents1 = GetHelloWorld();
+                byte[] contents2 = GetHelloWorldAgain();
+                File.WriteAllBytes(f1, contents1);
+
+                using (TransactionScope scope1 = new TransactionScope())
+                {
+                    f2 = _target.WriteAllBytes(f1, contents2, renameIfExists:true);
+                }
+
+                Assert.Equal(contents1, File.ReadAllBytes(f1));
+                Assert.NotEqual(f2, f1);
             }
             finally
             {

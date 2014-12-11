@@ -748,6 +748,12 @@ namespace ChinhDo.Transactions.FileManager.Tests
                 threads.Add(new Thread(CanSnapshot));
                 threads.Add(new Thread(CanWriteAllText));
                 threads.Add(new Thread(CanWriteAllTextAndRollback));
+                threads.Add(new Thread(CanWriteAllTextAndRename));
+                threads.Add(new Thread(CanWriteAllTextAndRenameAndRollback));
+                threads.Add(new Thread(CanWriteAllBytes));
+                threads.Add(new Thread(CanWriteAllBytesAndRollback));
+                threads.Add(new Thread(CanWriteAllBytesAndRename));
+                threads.Add(new Thread(CanWriteAllBytesAndRenameAndRollback));
             }
 
             foreach (Thread t in threads)

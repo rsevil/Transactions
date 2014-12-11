@@ -23,6 +23,8 @@ namespace ChinhDo.Transactions.FileManager
 
         #region IFileOperations
 
+        //TODO: Move not-transactional operations to proper classes that implement IOperation or IOperation<T>
+
         /// <summary>Appends the specified string the file, creating the file if it doesn't already exist.</summary>
         /// <param name="path">The file to append the string to.</param>
         /// <param name="contents">The string to append to the file.</param>
@@ -108,6 +110,23 @@ namespace ChinhDo.Transactions.FileManager
             }
             else
             {
+                if (File.Exists(path))
+                {
+                    if (renameIfExists)
+                    {
+                        var dir = Path.GetDirectoryName(path);
+                        var fn = Path.GetFileNameWithoutExtension(path);
+                        var ext = Path.GetExtension(path);
+
+                        var i = 0;
+                        while (File.Exists(path))
+                        {
+                            i++;
+                            path = Path.Combine(dir, string.Format("{0}_({1}){2}", fn, i, ext));
+                        }
+                    }
+                }
+
                 File.WriteAllText(path, contents);
                 return path;
             }
@@ -126,6 +145,23 @@ namespace ChinhDo.Transactions.FileManager
             }
             else
             {
+                if (File.Exists(path))
+                {
+                    if (renameIfExists)
+                    {
+                        var dir = Path.GetDirectoryName(path);
+                        var fn = Path.GetFileNameWithoutExtension(path);
+                        var ext = Path.GetExtension(path);
+
+                        var i = 0;
+                        while (File.Exists(path))
+                        {
+                            i++;
+                            path = Path.Combine(dir, string.Format("{0}_({1}){2}", fn, i, ext));
+                        }
+                    }
+                }
+
                 File.WriteAllBytes(path, contents);
                 return path;
             }

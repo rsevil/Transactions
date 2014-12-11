@@ -78,7 +78,7 @@
     <Compile Include="Operations\SingleFileOperation.cs" />
     <Compile Include="Operations\Move.cs" />
     <Compile Include="Operations\IRollbackableOperation.cs" />
-    <Compile Include="Operations\SnapshotOperation.cs" />
+    <Compile Include="Operations\Snapshot.cs" />
     <Compile Include="TxFileManager.cs" />
     <Compile Include="IFileManager.cs" />
     <Compile Include="IFileOperations.cs" />

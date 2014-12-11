@@ -28,9 +28,25 @@ namespace ChinhDo.Transactions.FileManager.Operations
         {
             if (File.Exists(path))
             {
-                string temp = FileUtils.GetTempFileName(Path.GetExtension(path));
-                File.Copy(path, temp);
-                backupPath = temp;
+                if (renameIfExists)
+                {
+                    var dir = Path.GetDirectoryName(path);
+                    var fn = Path.GetFileNameWithoutExtension(path);
+                    var ext = Path.GetExtension(path);
+
+                    var i = 0;
+                    while (File.Exists(path))
+                    {
+                        i++;
+                        path = Path.Combine(dir, string.Format("{0}_({1}){2}", fn, i, ext));
+                    }
+                }
+                else
+                {
+                    string temp = FileUtils.GetTempFileName(Path.GetExtension(path));
+                    File.Copy(path, temp);
+                    backupPath = temp;
+                }
             }
 
             File.WriteAllBytes(path, contents);

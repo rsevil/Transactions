@@ -9,7 +9,7 @@ namespace ChinhDo.Transactions.FileManager.Operations
     /// </summary>
     abstract class SingleFileOperation<T> : IRollbackableOperation<T>, IDisposable
     {
-        protected readonly string path;
+        protected string path;
         protected string backupPath;
         // tracks whether Dispose has been called
         private bool disposed;

@@ -33,6 +33,7 @@ using (TransactionScope scope1 = new TransactionScope())
 	- Move
 	- Snapshot
 	- WriteAllText
+	- WriteAllBytes
 
 This library supports any file system and is not a wrapper over Transactional NTFS (see [AlphaFS](http://alphafs.codeplex.com/)).
 

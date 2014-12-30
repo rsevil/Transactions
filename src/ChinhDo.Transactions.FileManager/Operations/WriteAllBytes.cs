@@ -51,7 +51,7 @@ namespace ChinhDo.Transactions.FileManager.Operations
 
             File.WriteAllBytes(path, contents);
 
-            return path;
+            return Path.GetFileName(path);
         }
     }
 }

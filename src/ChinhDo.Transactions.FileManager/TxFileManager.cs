@@ -101,7 +101,7 @@ namespace ChinhDo.Transactions.FileManager
         /// <param name="path">The file to write to.</param>
         /// <param name="contents">The string to write to the file.</param>
         /// <param name="renameIfExists">Rename the file if a file with that filename exists, otherwise overwrite.</param>
-        /// <returns>The full file path of the file</returns>
+        /// <returns>The filename of the file</returns>
         public string WriteAllText(string path, string contents, bool renameIfExists = false)
         {
             if (IsInTransaction())
@@ -128,7 +128,7 @@ namespace ChinhDo.Transactions.FileManager
                 }
 
                 File.WriteAllText(path, contents);
-                return path;
+                return Path.GetFileName(path);
             }
         }
 
@@ -136,7 +136,7 @@ namespace ChinhDo.Transactions.FileManager
         /// <param name="path">The file to write to.</param>
         /// <param name="contents">The bytes to write to the file.</param>
         /// <param name="renameIfExists">Rename the file if a file with that filename exists, otherwise overwrite.</param>
-        /// <returns>The full file path of the file</returns>
+        /// <returns>The filename of the file</returns>
         public string WriteAllBytes(string path, byte[] contents, bool renameIfExists = false)
         {
             if (IsInTransaction())
@@ -163,7 +163,7 @@ namespace ChinhDo.Transactions.FileManager
                 }
 
                 File.WriteAllBytes(path, contents);
-                return path;
+                return Path.GetFileName(path);
             }
         }
 

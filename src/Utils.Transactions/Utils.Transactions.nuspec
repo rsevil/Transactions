@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <projectUrl>https://github.com/rsevil-origin/TxFileManager</projectUrl>
+    <iconUrl>https://cdn3.iconfinder.com/data/icons/metro-design/512/rotate_right-512.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <copyright>Copyright 2015</copyright>
+    <tags>.net transactions</tags>
+  </metadata>
+</package>

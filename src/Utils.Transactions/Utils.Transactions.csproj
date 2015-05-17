@@ -43,11 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IOperation.cs" />
-    <Compile Include="IOperationOfT.cs" />
+    <Compile Include="IExecutable.cs" />
+    <Compile Include="IExecutableOfT.cs" />
     <Compile Include="IRollbackable.cs" />
-    <Compile Include="IRollbackableOperation.cs" />
-    <Compile Include="IRollbackableOperationOfT.cs" />
+    <Compile Include="IRollbackableExecutable.cs" />
+    <Compile Include="IRollbackableExecutableOfT.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TransactionManager.cs" />
     <Compile Include="TransactionEnlistment.cs" />

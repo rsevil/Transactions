@@ -5,7 +5,7 @@ namespace Utils.Transactions.IO.Files.Local.Operations
     /// <summary>
     /// Rollbackable operation which moves a file to a new location.
     /// </summary>
-    internal sealed class Move : IRollbackableOperation
+    internal sealed class Move : IRollbackableExecutable
     {
         private readonly string sourceFileName;
         private readonly string destFileName;

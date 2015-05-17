@@ -7,7 +7,7 @@ namespace Utils.Transactions.IO.Files.Local.Operations
     /// <summary>
     /// Deletes the specified directory and all its contents.
     /// </summary>
-    internal sealed class DeleteDirectory : IRollbackableOperation, IDisposable
+    internal sealed class DeleteDirectory : IRollbackableExecutable, IDisposable
     {
         private readonly string path;
         private string backupPath;

@@ -5,7 +5,7 @@ namespace Utils.Transactions.IO.Files.Local.Operations
     /// <summary>
     /// Creates all directories in the specified path.
     /// </summary>
-    internal sealed class CreateDirectory : IRollbackableOperation
+    internal sealed class CreateDirectory : IRollbackableExecutable
     {
         private readonly string path;
         private string backupPath;

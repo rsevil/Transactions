@@ -112,14 +112,14 @@ namespace Utils.Transactions.IO.Files.Local
             return File.Exists(path);
         }
 
-        private TReturn ExecuteOperation<TReturn>(Func<IRollbackableOperation<TReturn>> operation)
+        private TReturn ExecuteOperation<TReturn>(Func<IRollbackableExecutable<TReturn>> operation)
         {
             return IsInTransaction()
                 ? EnlistOperation(operation())
                 : operation().Execute();
         }
 
-        private void ExecuteOperation(Func<IRollbackableOperation> operation)
+        private void ExecuteOperation(Func<IRollbackableExecutable> operation)
         {
             if (IsInTransaction())
                 EnlistOperation(operation());

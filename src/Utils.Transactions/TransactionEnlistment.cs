@@ -23,11 +23,11 @@ namespace Utils.Transactions
         }
 
         /// <summary>
-        /// Enlists <paramref name="operation"/> in its journal, so it will be committed or rolled
+        /// Enlists <paramref name="operation"/> in its journal, so it will be committed or rolled back
         /// together with the other enlisted operations.
         /// </summary>
         /// <param name="operation"></param>
-        public virtual void EnlistOperation(IRollbackableOperation operation)
+        public virtual void EnlistOperation(IRollbackableExecutable operation)
         {
             operation.Execute();
 
@@ -35,12 +35,12 @@ namespace Utils.Transactions
         }
 
         /// <summary>
-        /// Enlists <paramref name="operation"/> in its journal, so it will be committed or rolled
+        /// Enlists <paramref name="operation"/> in its journal, so it will be committed or rolled back
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="operation"></param>
         /// <returns>The result of the operation</returns>
-        public virtual T EnlistOperation<T>(IRollbackableOperation<T> operation)
+        public virtual T EnlistOperation<T>(IRollbackableExecutable<T> operation)
         {
             var r = operation.Execute();
 
@@ -81,9 +81,9 @@ namespace Utils.Transactions
 
                 DisposeJournal();
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                throw new TransactionException("Failed to roll back.", e);
+                throw new TransactionException("Failed to roll back.", ex);
             }
 
             enlistment.Done();

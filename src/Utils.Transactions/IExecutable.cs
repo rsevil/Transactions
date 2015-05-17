@@ -3,7 +3,7 @@
     /// <summary>
     /// Represents an operation
     /// </summary>
-    public interface IOperation
+    public interface IExecutable
     {
         /// <summary>
         /// Executes the operation.

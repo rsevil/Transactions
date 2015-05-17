@@ -1,6 +1,6 @@
 ﻿namespace Utils.Transactions.IO.Files.Local.Operations
 {
-    internal abstract class SingleFileOperation : SingleFileOperationBase, IRollbackableOperation
+    internal abstract class SingleFileOperation : SingleFileOperationBase, IRollbackableExecutable
     {
         public SingleFileOperation(string path)
             : base(path)

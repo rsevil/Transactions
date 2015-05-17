@@ -38,12 +38,12 @@ namespace Utils.Transactions
             return enlistment;
         }
 
-        protected virtual void EnlistOperation(IRollbackableOperation operation)
+        protected virtual void EnlistOperation(IRollbackableExecutable operation)
         {
             ((TransactionEnlistment)GetEnlistmentNotification()).EnlistOperation(operation);
         }
 
-        protected virtual T EnlistOperation<T>(IRollbackableOperation<T> operation)
+        protected virtual T EnlistOperation<T>(IRollbackableExecutable<T> operation)
         {
             return ((TransactionEnlistment)GetEnlistmentNotification()).EnlistOperation(operation);
         }

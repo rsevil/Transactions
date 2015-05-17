@@ -1,7 +1,7 @@
 ﻿namespace Utils.Transactions
 {
     /// <summary>
-    /// Represents an object that can rollback something
+    /// Represents an object that can rollback its state
     /// </summary>
     public interface IRollbackable
     {

@@ -49,7 +49,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Utils.Transactions\Transactions.csproj">
+    <ProjectReference Include="..\Transactions\Transactions.csproj">
       <Project>{a96b7427-8337-4ba1-91b7-d96cc85b62e1}</Project>
       <Name>Transactions</Name>
     </ProjectReference>

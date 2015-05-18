@@ -102,11 +102,11 @@
     <None Include="Utils.Transactions.IO.Files.pub.bat" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Utils.Transactions.IO.Files\Transactions.IO.Files.csproj">
+    <ProjectReference Include="..\Transactions.IO.Files\Transactions.IO.Files.csproj">
       <Project>{9c7dcfcd-397e-4ba4-bf80-f5d9746e100d}</Project>
       <Name>Transactions.IO.Files</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Utils.Transactions\Transactions.csproj">
+    <ProjectReference Include="..\Transactions\Transactions.csproj">
       <Project>{a96b7427-8337-4ba1-91b7-d96cc85b62e1}</Project>
       <Name>Transactions</Name>
     </ProjectReference>

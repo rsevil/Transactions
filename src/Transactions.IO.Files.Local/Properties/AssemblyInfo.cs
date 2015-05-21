@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Transactions.IO.Files.Local")]
-[assembly: AssemblyDescription("A transactional file manager for .NET")]
+[assembly: AssemblyDescription("A local file system implementation of the FileManagerBase abstract class, provides standalone transactional file operations for .NET framework")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Transactions.IO.Files.Local")]
-[assembly: AssemblyCopyright("Copyright ©  2008 Chinh Do http://www.chinhdo.com")]
+[assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

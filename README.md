@@ -1,5 +1,10 @@
 # Transactional File Manager #
 
+## THIS PROJECT HAS BEEN ARCHIVED DUE TO THE ORIGINAL OWNER HAS RECENTLY MIGRATED IT TO GITHUB
+
+Please refer to: https://github.com/chinhdo/txFileManager
+
+
 ## Project Description ##
 
 Transactional File Manager is a .NET API that supports including file system operations such as file copy, move, delete, append, etc. in a transaction. It's an implementation of System.Transaction.IEnlistmentNotification (works with System.Transactions.TransactionScope).
